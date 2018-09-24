@@ -99,9 +99,10 @@ def get_me():
 
 
 @user_api.route('/login', methods=['POST'])
-def login():
+def login_user():
     req_data = request.get_json()
-
+    print('LLOOOOOKKK')
+    print(req_data)
     data, error = user_schema.load(req_data, partial=True)
 
     if error:

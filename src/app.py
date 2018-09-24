@@ -27,18 +27,20 @@ def create_app(env_name):
     app.register_blueprint(party_blueprint, url_prefix='/api/v1/parties')
     app.register_blueprint(song_blueprint, url_prefix='/api/v1/songs')
 
-    @app.route('/', methods=['GET'])
+
+    @app.route('/')
     def index():
         """
         homepage endpoint
         """
-        return render_template('index.html')
+        return render_template('signup.html')
 
-    return app
-
-    @app.route('/signup', methods=['GET'])
-    def signup():
+    @app.route('/login')
+    def login():
         """
         signup page endpoint
         """
-        return render_template('signup.html')
+        return render_template('login.html')
+
+
+    return app
