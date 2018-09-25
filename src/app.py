@@ -1,6 +1,6 @@
 #src/app.py
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request,jsonify
 
 from .config import app_config
 from .models import db, bcrypt
@@ -13,7 +13,6 @@ def create_app(env_name):
     """
     Create app
     """
-
     # app initialization
     app = Flask(__name__)
 
@@ -31,16 +30,35 @@ def create_app(env_name):
     @app.route('/')
     def index():
         """
-        homepage endpoint
+        index endpoint
         """
-        return render_template('signup.html')
+        return render_template('index.html')
+
+    @app.route('/welcome')
+    def welcome():
+        return render_template('welcome.html')
 
     @app.route('/login')
     def login():
-        """
-        signup page endpoint
-        """
         return render_template('login.html')
+
+    @app.route('/signup')
+    def signUp():
+        return render_template('signup.html')
+
+    #This is for the template I took from codecademy requests class
+    #I found a long decorator function on stack overflow that might
+    #have let me call other api's, but I think the right solution
+    #would be to use:
+    #flask_cors
+    #find that if I ever want to call another api
+    #AKA THE SPOTIFY API
+    @app.route('/datamuse-example')#, methods=['OPTIONS'])
+    #@crossdomain(origin='*')
+    def datamuse():
+        return render_template('datamuse_example.html')
+
+
 
 
     return app
